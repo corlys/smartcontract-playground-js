@@ -23,11 +23,11 @@ async function main() {
   });
   const contract2 = new ethers.Contract(address2, abi2, account2);
   scheaduler.scheduleJob("*/2 * * * *", async () => {
-    const sendTx1 = await contract2.execEvent1();
+    const sendTx1 = await contract2.connect(account2).execEvent1();
     await sendTx1.wait();
     console.log("Exec Event 1 SC 2 hash: ", sendTx1.hash);
 
-    const sendTx2 = await contract2.execEvent2();
+    const sendTx2 = await contract2.connect(account2).execEvent2();
     await sendTx2.wait();
     console.log("Exec Event 2 SC 2 hash: ", sendTx2.hash);
   });
