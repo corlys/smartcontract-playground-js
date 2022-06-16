@@ -71,6 +71,7 @@ const startConnection = () => {
     clearInterval(keepAliveInterval);
     clearTimeout(pingTimeout);
     contract.removeAllListeners();
+    contractTwo.removeAllListeners();
     startConnection();
   });
 
