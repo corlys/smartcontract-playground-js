@@ -43,6 +43,7 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(error);
+  console.log("Somethings wrong, here's the message : ", error);
+  // console.error(error);
   process.exitCode = 1;
 });
