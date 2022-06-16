@@ -12,7 +12,7 @@ async function main() {
   const address1 = "0x99b8cC5B80a79d658513a9DF117320f4AE46Bb01";
   const address2 = "0x0e460fAF94Cd5838b56CE555b55C328784e41305";
   const contract1 = new ethers.Contract(address1, abi1, account1);
-  scheaduler.scheduleJob("*/2 * * * *", async () => {
+  scheaduler.scheduleJob("* * * * *", async () => {
     const sendTx1 = await contract1.execEvent1();
     await sendTx1.wait();
     console.log("Exec Event 1 SC 1 hash: ", sendTx1.hash);
@@ -22,7 +22,7 @@ async function main() {
     console.log("Exec Event 2 SC 1 hash: ", sendTx2.hash);
   });
   const contract2 = new ethers.Contract(address2, abi2, account2);
-  scheaduler.scheduleJob("*/2 * * * *", async () => {
+  scheaduler.scheduleJob("* * * * *", async () => {
     const sendTx1 = await contract2.connect(account2).execEvent1();
     await sendTx1.wait();
     console.log("Exec Event 1 SC 2 hash: ", sendTx1.hash);
