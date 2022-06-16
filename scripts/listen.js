@@ -17,28 +17,28 @@ async function main() {
     console.log("Event TestEvent1");
     console.log(`sender : ${sender}`);
     console.log(`counter : ${counter}`);
-    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
+    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}\n`);
   });
 
   contract.on("TestEvent2", (sender, counter, timestamp) => {
     console.log("Event TestEvent2");
     console.log(`sender : ${sender}`);
     console.log(`counter : ${counter}`);
-    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
+    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}\n`);
   });
 
   contractTwo.on("AnotherEvent1", (sender, counter, timestamp) => {
     console.log("Event AnotherEvent1");
     console.log(`sender : ${sender}`);
     console.log(`counter : ${counter}`);
-    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
+    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}\n`);
   });
 
   contractTwo.on("AnotherEvent2", (sender, counter, timestamp) => {
     console.log("Event AnotherEvent2");
     console.log(`sender : ${sender}`);
     console.log(`counter : ${counter}`);
-    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
+    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}\n`);
   });
 }
 
