@@ -15,23 +15,33 @@ async function main() {
   const contractTwo = new ethers.Contract(event2, EventAbiTwo.abi, provider);
 
   contract.on("TestEvent1", (sender, counter, timestamp) => {
-    console.log("ZAPP 1");
-    console.log(sender, counter, timestamp);
+    console.log("Event TestEvent1");
+    console.log(`sender : ${sender}`);
+    console.log(`counter : ${counter}`);
+    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
   });
 
   contract.on("TestEvent2", (sender, counter, timestamp) => {
-    console.log("ZAPP 2");
-    console.log(sender, counter, timestamp);
+    console.log("Event TestEvent2");
+    console.log(`sender : ${sender}`);
+    console.log(`counter : ${counter}`);
+    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
+  });
   });
 
   contractTwo.on("AnotherEvent1", (sender, counter, timestamp) => {
-    console.log("ZAPP 1 Another");
-    console.log(sender, counter, timestamp);
+    console.log("Event AnotherEvent1");
+    console.log(`sender : ${sender}`);
+    console.log(`counter : ${counter}`);
+    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
+  });
   });
 
   contractTwo.on("AnotherEvent2", (sender, counter, timestamp) => {
-    console.log("ZAPP 2 Another");
-    console.log(sender, counter, timestamp);
+    console.log("Event AnotherEvent2");
+    console.log(`sender : ${sender}`);
+    console.log(`counter : ${counter}`);
+    console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
   });
 }
 
