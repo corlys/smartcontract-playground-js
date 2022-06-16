@@ -4,7 +4,6 @@ const EventAbi = require("../artifacts/contracts/EventContract.sol/EventContract
 const EventAbiTwo = require("../artifacts/contracts/AnotherContract.sol/AnotherContract.json");
 
 async function main() {
-  console.log("ZAP");
   const event1 = "0x99b8cC5B80a79d658513a9DF117320f4AE46Bb01";
   const event2 = "0x0e460fAF94Cd5838b56CE555b55C328784e41305";
   const provider = new ethers.providers.WebSocketProvider(
@@ -27,14 +26,12 @@ async function main() {
     console.log(`counter : ${counter}`);
     console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
   });
-  });
 
   contractTwo.on("AnotherEvent1", (sender, counter, timestamp) => {
     console.log("Event AnotherEvent1");
     console.log(`sender : ${sender}`);
     console.log(`counter : ${counter}`);
     console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}`);
-  });
   });
 
   contractTwo.on("AnotherEvent2", (sender, counter, timestamp) => {
