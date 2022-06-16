@@ -21,7 +21,7 @@ const startConnection = () => {
 
   provider._websocket.on("open", () => {
     keepAliveInterval = setInterval(() => {
-      console.log("Checking if the connection is alive, sending a ping");
+      // console.log("Checking if the connection is alive, sending a ping");
 
       provider._websocket.ping();
 
@@ -77,7 +77,7 @@ const startConnection = () => {
   });
 
   provider._websocket.on("pong", () => {
-    console.log("Received pong, so connection is alive, clearing the timeout");
+    // console.log("Received pong, so connection is alive, clearing the timeout");
     clearInterval(pingTimeout);
   });
 };
