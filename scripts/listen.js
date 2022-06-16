@@ -20,6 +20,7 @@ const startConnection = () => {
   const contractTwo = new ethers.Contract(event2, EventAbiTwo.abi, provider);
 
   provider._websocket.on("open", () => {
+    console.log("I was made at ", new Date().toJSON());
     keepAliveInterval = setInterval(() => {
       // console.log("Checking if the connection is alive, sending a ping");
 
@@ -69,10 +70,7 @@ const startConnection = () => {
     console.log("The websocket connection was closed");
     clearInterval(keepAliveInterval);
     clearTimeout(pingTimeout);
-    contract.removeAllListeners("TestEvent1");
-    contract.removeAllListeners("TestEvent2");
-    contract.removeAllListeners("AnotherEvent1");
-    contract.removeAllListeners("AnotherEvent2");
+    contract.removeAllListeners();
     startConnection();
   });
 
