@@ -26,14 +26,14 @@ module.exports = {
   networks: {
     astar: {
       url: process.env.ASTAR_PROVIDER || "",
-      accounts: [process.env.A_PKEY, process.env.B_PKEY],
+      accounts: [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY_SECOND],
     },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
     currency: "USD",
   },
-  etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
-  },
+  // etherscan: {
+  //   apiKey: process.env.ETHERSCAN_API_KEY,
+  // },
 };
