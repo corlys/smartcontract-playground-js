@@ -67,7 +67,7 @@ const startConnection = () => {
   });
 
   provider._websocket.on("close", () => {
-    console.log("The websocket connection was closed");
+    console.log("The websocket connection was closed at ", new Date().toJSON());
     clearInterval(keepAliveInterval);
     clearTimeout(pingTimeout);
     contract.removeAllListeners();
