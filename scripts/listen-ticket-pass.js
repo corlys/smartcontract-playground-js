@@ -15,13 +15,16 @@ const startConnection = () => {
 
   let pingTimeout = null;
   let keepAliveInterval = null;
+  let aliveTime = null;
+  let deadTime = null;
   const ticketPassAddress = "0xd9B46b36C14092EE2200aE7D9BF1873375861E04";
   // const event2 = "0x0e460fAF94Cd5838b56CE555b55C328784e41305";
   const contract = new ethers.Contract(ticketPassAddress, abi, provider);
   // const contractTwo = new ethers.Contract(event2, EventAbiTwo.abi, provider);
 
   provider._websocket.on("open", () => {
-    console.log("I was made at ", new Date().toJSON());
+    aliveTime = new Date().toJSON();
+    console.log("I was made at ", aliveTime);
     keepAliveInterval = setInterval(() => {
       // console.log("Checking if the connection is alive, sending a ping");
 
@@ -42,12 +45,16 @@ const startConnection = () => {
       console.log("Event Mint");
       console.log(`to : ${to}`);
       console.log(`amount : ${amount}\n`);
-      // console.log(`date : ${new Date(timestamp.toNumber() * 1000).toJSON()}\n`);
     });
   });
 
   provider._websocket.on("close", () => {
-    console.log("The websocket connection was closed at ", new Date().toJSON());
+    deadTime = new Date().toJSON();
+    const difference = Math.abs(deadTime - aliveTime);
+    console.log("The websocket connection was closed at ", deadTime);
+    console.log(
+      `Difference between deadTime and aliveTime is ${difference} ms`
+    );
     clearInterval(keepAliveInterval);
     clearTimeout(pingTimeout);
     contract.removeAllListeners();
