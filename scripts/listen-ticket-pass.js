@@ -94,9 +94,10 @@ const startConnection = () => {
         amount: 1,
         to,
         from,
+        tokenId,
       };
 
-      console.log("zap", data);
+      console.log(data);
 
       await axios.post(
         "https://us-central1-cosmo-customize.cloudfunctions.net/app/test/transactionLog",
