@@ -94,7 +94,7 @@ const startConnection = () => {
         amount: 1,
         to,
         from,
-        tokenId,
+        tokenId: tokenId.toNumber(),
       };
 
       console.log(data);
