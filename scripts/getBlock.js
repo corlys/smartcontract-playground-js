@@ -32,6 +32,7 @@ async function main() {
           for (let i = 0; i < logs.length; i++) {
             try {
               // console.log(logs[i]);
+              const contractAddress = logs[i].address;
               const data = logs[i].data;
               const topics = logs[i].topics;
               const log = {
@@ -44,6 +45,7 @@ async function main() {
               const iface = new ethers.utils.Interface(abi);
               const decodedLog = iface.parseLog(log);
               console.log(decodedLog.args);
+              console.log(`Contract Address : ${contractAddress}`);
             } catch (error) {
               // console.log(error);
             }

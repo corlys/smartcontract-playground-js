@@ -3,6 +3,7 @@ const ethers = require("ethers");
 const {
   abi,
 } = require("../artifacts/contracts/TicketPass.sol/TicketPass.json");
+// const axios = require("axios").default;
 
 const EXPECTED_PONG_BACK = 15000;
 const KEEP_ALIVE_CHECK_INTERVAL = 7500;
@@ -23,8 +24,8 @@ const startConnection = () => {
   // const contractTwo = new ethers.Contract(event2, EventAbiTwo.abi, provider);
 
   provider._websocket.on("open", () => {
-    aliveTime = new Date().toJSON();
-    console.log("I was made at ", aliveTime);
+    aliveTime = new Date();
+    console.log("I was made at ", aliveTime.toJSON());
     keepAliveInterval = setInterval(() => {
       // console.log("Checking if the connection is alive, sending a ping");
 
@@ -41,7 +42,7 @@ const startConnection = () => {
 
     // TODO: handle contract listeners setup + indexing
 
-    contract.on("Mint", (to, amount) => {
+    contract.on("Mint", async (to, amount) => {
       console.log("Event Mint");
       console.log(`to : ${to}`);
       console.log(`amount : ${amount}\n`);
@@ -59,9 +60,9 @@ const startConnection = () => {
   });
 
   provider._websocket.on("close", () => {
-    deadTime = new Date().toJSON();
+    deadTime = new Date();
     const difference = Math.abs(deadTime - aliveTime);
-    console.log("The websocket connection was closed at ", deadTime);
+    console.log("The websocket connection was closed at ", deadTime.toJSON());
     console.log(
       `Difference between deadTime and aliveTime is ${difference} ms`
     );
