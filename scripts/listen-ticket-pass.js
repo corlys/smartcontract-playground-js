@@ -3,7 +3,7 @@ const ethers = require("ethers");
 const {
   abi,
 } = require("../artifacts/contracts/TicketPass.sol/TicketPass.json");
-// const axios = require("axios").default;
+const axios = require("axios").default;
 
 const EXPECTED_PONG_BACK = 15000;
 const KEEP_ALIVE_CHECK_INTERVAL = 7500;
@@ -42,10 +42,71 @@ const startConnection = () => {
 
     // TODO: handle contract listeners setup + indexing
 
-    contract.on("Mint", async (to, amount) => {
-      console.log("Event Mint");
-      console.log(`to : ${to}`);
-      console.log(`amount : ${amount}\n`);
+    // contract.on("Mint", async (to, amount, log) => {
+    //   console.log("Event Mint");
+    //   console.log(`to : ${to}`);
+    //   console.log(`amount : ${amount}\n`);
+
+    //   // {
+    //   //   "transaction_id": <string>,
+    //   //   "amount": <integer>,
+    //   //   "from": <string>,
+    //   //   "to": <string>
+    //   // }
+
+    //   const data = {
+    //     transaction_id: log?.transactionHash,
+    //     amount,
+    //     to,
+    //     from: "",
+    //   };
+
+    //   console.log("zap", data);
+
+    //   await axios.post(
+    //     "https://us-central1-cosmo-customize.cloudfunctions.net/app/test/transactionLog",
+    //     data
+    //   );
+
+    //   // tracking token ownership
+    //   // fetch token by tokenId =>
+    //   // # kalau docs nya ga ada dia kita masukin dengan buat row baru, creator dan
+    //   // owner field dapet dari `to`
+    //   // # kalau docs ada cukup ganti owner nya menjadi yang to
+
+    //   // tracking user
+    //   // get user dengan parameter to, jika dapet di docs biarkan, jika tidak bikin row
+    //   // baru buat user
+    // });
+
+    contract.on("Transfer", async (from, to, tokenId, logReceipt) => {
+      console.log("Event Transfer");
+
+      // {
+      //   "transaction_id": <string>,
+      //   "amount": <integer>,
+      //   "from": <string>,
+      //   "to": <string>
+      // }
+
+      const data = {
+        transaction_id: logReceipt?.transactionHash,
+        amount: 1,
+        to,
+        from,
+      };
+
+      console.log("zap", data);
+
+      await axios.post(
+        "https://us-central1-cosmo-customize.cloudfunctions.net/app/test/transactionLog",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       // tracking token ownership
       // fetch token by tokenId =>
