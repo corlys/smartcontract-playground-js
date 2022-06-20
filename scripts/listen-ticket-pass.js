@@ -45,6 +45,16 @@ const startConnection = () => {
       console.log("Event Mint");
       console.log(`to : ${to}`);
       console.log(`amount : ${amount}\n`);
+
+      // tracking token ownership
+      // fetch token by tokenId =>
+      // # kalau docs nya ga ada dia kita masukin dengan buat row baru, creator dan
+      // owner field dapet dari `to`
+      // # kalau docs ada cukup ganti owner nya menjadi yang to
+
+      // tracking user
+      // get user dengan parameter to, jika dapet di docs biarkan, jika tidak bikin row
+      // baru buat user
     });
   });
 
